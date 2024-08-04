@@ -2,7 +2,7 @@ import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 
-class ScrapExperience:
+class ScrapEducation:
     def __init__(self, section_soup):
         self.soup = section_soup
 
@@ -12,12 +12,10 @@ class ScrapExperience:
                     (
                     "system",
                         """
-                        You will be given a text scrapped from LinkedIn Profile page sepcially the experience section.
+                        You will be given a text scrapped from LinkedIn Profile page sepcially the education section.
                         the text is given to you in the 'text' variable.
-                        your task is to output a json with the following keys 'Company_name',
-                        'Job_title' (or 'Job_titles' if a person serves more than once in this company).
-                        values for 'Title' or 'Titles' include both the job title and details if exist about this title or titles.
-                        possible subkeys for details may be (Employment_type (vallues for this may be: part-time, full-time, internship), Location, Description or Skills), 
+                        your task is to output a json with the following keys 'School',
+                        'Duration_of_study', and 'Details_about_study' in the value of this key determine if it is still student or graduated. 
                         Ignore any image files.
                         Output the dictionary only with out any other text,
                         """
@@ -36,23 +34,23 @@ class ScrapExperience:
     def call_llm(self):
         """
         This function:
-        1. takes the bs4 object of the experience section (not the whole page bs4 object)
-        2. loops through the experience section items
+        1. takes the bs4 object of the education section (not the whole page bs4 object)
+        2. loops through the education section items
         3. returns a list of json objecsts formatted like:
-            ex: [{"Company_name": "CAT Reloaded", "job_title": "data scientist" ...},
-                 {"Company_name": "IEEE", "job_title": "ML engineer" ...}]
+            ex: [{"School": "Mansoura University", "Duration_of_study": '2020-2025' ...},
+                 {"School": "STEM School", "Duration_of_study": '2017-2020' ...}]
         """
-        self.experience_list = []
-        self.experience_items = [item for item in self.soup.find("ul").children if item.name == 'li']
+        self.education_list = []
+        self.education_items = [item for item in self.soup.find("ul").children if item.name == 'li']
         
-        for item in self.experience_items:
+        for item in self.education_items:
             text = item.get_text().replace("\n"," ").strip()
             result = self.chain.invoke({'text':text}).content.strip("```json\n").strip("\n```")
             try:
                 result = eval(result)
             except:
                 pass
-            self.experience_list.append(result)
+            self.education_list.append(result)
         
-        return self.experience_list
+        return self.education_list
 

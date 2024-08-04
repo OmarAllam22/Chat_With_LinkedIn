@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 from scrap_experience import ScrapExperience
-
+from scrap_education import ScrapEducation
 class ScrapLinkedInProfile:
     def __init__(self, driver, profile_link):
         self.driver = driver
@@ -127,4 +127,9 @@ class ScrapLinkedInProfile:
         object = ScrapExperience(section_soup)
         return object.call_llm()
     
+
+
+    def get_education(self, section_soup):
+        object = ScrapEducation(section_soup)
+        return object.call_llm()
 

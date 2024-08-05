@@ -33,7 +33,7 @@ class ScrapExperience:
 
         self.chain = self.prompt | self.model 
 
-    def get_output_dictionary(self):
+    def get_output(self):
         """
         This function:
         1. takes the bs4 object of the experience section (not the whole page bs4 object)

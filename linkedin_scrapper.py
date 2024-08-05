@@ -5,6 +5,8 @@ from scrap_experience import ScrapExperience
 from scrap_education import ScrapEducation
 from scrap_certification import ScrapCertification
 from scrap_projects import ScrapProjects
+from scrap_skills import ScrapSkills
+from scrap_featured import ScrapFeatured
 
 class ScrapLinkedInProfile:
     def __init__(self, driver, profile_link):
@@ -12,7 +14,7 @@ class ScrapLinkedInProfile:
         self.profile_link = profile_link
         # Signing in LinkedIn
         self.driver.get("https://linkedin.com/uas/login")
-        time.sleep(5)
+        time.sleep(3)
         username = self.driver.find_element(By.ID, "username")
         username.send_keys("omarallam@std.mans.edu.eg")
         password = self.driver.find_element(By.ID, "password")
@@ -68,19 +70,27 @@ class ScrapLinkedInProfile:
 
     def get_experience(self, section_soup):
         object = ScrapExperience(section_soup)
-        return object.get_output_dictionary()
+        return object.get_output()
     
 
     def get_education(self, section_soup):
         object = ScrapEducation(section_soup)
-        return object.get_output_dictionary()
+        return object.get_output()
 
 
     def get_certificate(self, section_soup):
         object = ScrapCertification(self.driver, self.profile_link, section_soup)
-        return object.get_output_dictionary()
+        return object.get_output()
 
 
     def get_projects(self, section_soup):
         object = ScrapProjects(self.driver, self.profile_link, section_soup)
-        return object.get_output_dictionary()
+        return object.get_output()
+    
+    def get_skills(self, section_soup):
+        object = ScrapSkills(self.driver, self.profile_link, section_soup)
+        return object.get_output()
+    
+    def get_featured(self, section_soup):
+        object = ScrapFeatured(self.driver, self.profile_link, section_soup)
+        return object.get_output()

@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-class ScrapCertification:
+class ScrapSkills:
     def __init__(self, driver, profile_link, section_soup):
         self.driver = driver
         self.profile_link = profile_link
@@ -9,21 +9,21 @@ class ScrapCertification:
 
 
     def _extract(self, section_soup, is_more):
-        cert_with_institute = {} 
+        skills = [] 
         if is_more:
             items = [item for item in section_soup.find("section",{"class":"artdeco-card"}).find("ul").children if item.name=='li']
         else:
             items = [item for item in section_soup.find("ul").children if item.name=='li']
         for item in items:
-            cert_name = item.find("div",{"class":"justify-space-between"}).find("span",{"class":"visually-hidden"}).get_text()
-            institute_name = item.find("div",{"class":"justify-space-between"}).find("span",{"class":"t-14"}).find("span",{"aria-hidden":"true"}).get_text()
-            cert_with_institute[cert_name] = institute_name
-        return cert_with_institute
+            skill = item.find("div", {"class":"mr1"}).find("span",{"class":"visually-hidden"}).get_text()
+            skills.append(skill)
+        return skills
+
 
     
     def get_output(self):
         """
-        output is a dictionary with keys as certificates_names and values as certificates_institutes.
+        output here is list containing all the skills.
         """
         if self.footer != None:
             show_more_link = self.footer.find("a").get('href')

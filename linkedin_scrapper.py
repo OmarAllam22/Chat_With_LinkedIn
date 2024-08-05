@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import time
 from scrap_experience import ScrapExperience
 from scrap_education import ScrapEducation
+from scrap_certification import ScrapCertification
+from scrap_projects import ScrapProjects
+
 class ScrapLinkedInProfile:
     def __init__(self, driver, profile_link):
         self.driver = driver
@@ -50,66 +53,6 @@ class ScrapLinkedInProfile:
         return self.description
     
 
-    def _collect_projects(self, section_soup):
-        """
-        helper function for the main `scrap_projects` function
-        """
-        projects_with_description = {}
-        for child in section_soup.find("ul").children:
-                if child.name == 'li':
-                    project_name = (child.find("div",{"class":"mr1"})
-                                        .find("span",{"class":"visually-hidden"})
-                                        .get_text())
-                    
-                    project_description = (child.find("li",{"class":"pvs-list__item--with-top-padding"})
-                                            .find("span",{"class":"visually-hidden"})
-                                            .get_text())
-                    
-                    projects_with_description[project_name] = project_description
-                else:
-                    continue
-
-        return projects_with_description
-
-
-    def _collect_more_projects(self, section_soup):
-        """
-        helper function to `scrap_"more"_projects`
-        """
-        projects_with_description = {}
-        projects_soup = section_soup.find("li",{"class":"artdeco-list__item"}).parent.findAll("li",{"class":"artdeco-list__item"})
-        for child in projects_soup:
-            if child.name == 'li':
-                project_name = (child.find("div",{"class":"mr1"})
-                                    .find("span",{"class":"visually-hidden"})
-                                    .get_text())
-                
-                project_description = (child.find("li",{"class":"pvs-list__item--with-top-padding"})
-                                        .find("span",{"class":"visually-hidden"})
-                                        .get_text())
-                projects_with_description[project_name] = project_description
-            else:
-                continue
-
-        return projects_with_description
-
-
-    def get_projects(self, section_soup):
-        # check if there is "show more items" in this section or not
-        footer = section_soup.find("div",{"class":"pvs-list__footer-wrapper"})
-        
-        if  footer != None:
-                show_more_link = footer.find("a").get('href')
-                self.driver.get(show_more_link)
-                temp_section_src = self.driver.page_source
-                temp_section_soup = BeautifulSoup(temp_section_src, "lxml")
-                
-                self.driver.get(self.profile_link+"#arrow-left-medium") # to return to the main page after entering the show-more-projects arrow.
-
-                return self._collect_more_projects(temp_section_soup)
-        else:
-            return self._collect_projects(section_soup)
-
 
     def get_about(self):
         """
@@ -125,11 +68,19 @@ class ScrapLinkedInProfile:
 
     def get_experience(self, section_soup):
         object = ScrapExperience(section_soup)
-        return object.call_llm()
+        return object.get_output_dictionary()
     
-
 
     def get_education(self, section_soup):
         object = ScrapEducation(section_soup)
-        return object.call_llm()
+        return object.get_output_dictionary()
 
+
+    def get_certificate(self, section_soup):
+        object = ScrapCertification(self.driver, self.profile_link, section_soup)
+        return object.get_output_dictionary()
+
+
+    def get_projects(self, section_soup):
+        object = ScrapProjects(self.driver, self.profile_link, section_soup)
+        return object.get_output_dictionary()

@@ -18,13 +18,13 @@ class ScrapLinkedInProfile:
         self.soup = BeautifulSoup(self.src, "lxml")
         self.profile_card_sections = self.soup.findAll("section",{"class":"pv-profile-card"}) # this returns a list of section codes
         self.personal_info = ""
-        self.about = ""
-        self.featured = ""
-        self.experience = ""
-        self.education = ""
-        self.certificate= ""
-        self.projects=""
-        self.skills=""
+        self.about = "`About` section wasn't found."
+        self.featured = "`Featured` section wasn't found."
+        self.experience =  "`Experience`section wasn't found."
+        self.education =  "`Education` section wasn't found."
+        self.certificate = "`Licenses_and_Certifications` section wasn't found."
+        self.projects = "`Projects` section wasn't found."
+        self.skills = "`Skills` section wasn't found."
 
     
     def scrap_all_sections(self):
@@ -32,6 +32,9 @@ class ScrapLinkedInProfile:
         self.personal_info = self._getPersonalInfo()
         # scrap sections (about, experience, education ... etc)
         for section in self.profile_card_sections:
+            # the following is because sometimes about = "" and and so on.
+            if section is None:
+               self.scrap_all_sections() 
             section_name = section.find("div").get('id')
             if section_name == 'about':
                 try:

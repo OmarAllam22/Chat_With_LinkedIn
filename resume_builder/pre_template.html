@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="template.css" />
+</head>
+<body>
+    
+<div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="title text-center">
+          <span class="personal_info" id="name">{name}</span>
+          <span class="personal_info" id="headline">{headline}</span>
+          <span class="personal_info" href="{profile_link}">{profile_link}</span>
+          <hr />
+        </div>
+        
+        <!-- summary section -->
+      <div class="page_content">   
+        <div class="summary">
+          <h2 class="text-center">Summary</h2>
+          {summary}
+        </div>
+        <hr />
+        
+        <!-- education section -->
+        <div class="education">
+          {education}
+        </div>
+        <hr />
+
+        <!-- experience section -->
+        <div class="experience">
+          {experience}
+        </div>
+        <hr />
+
+        <!-- projects section -->
+        <div class="projects">
+          {projects}
+        </div>
+        <hr />
+
+        <!-- skills section -->
+        <div class="skills">
+          {skills}
+        </div>
+        <hr />
+      </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

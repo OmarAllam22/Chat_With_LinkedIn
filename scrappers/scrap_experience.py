@@ -29,7 +29,7 @@ class ScrapExperience:
         )
 
         os.environ["GOOGLE_API_KEY"] = "AIzaSyC57_NvRsktnNgLvtyutDclVkCS2I4MKDI"
-        self.model = ChatGoogleGenerativeAI(model="gemini-1.5-pro")
+        self.model = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
         self.chain = self.prompt | self.model 
 

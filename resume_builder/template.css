@@ -8,20 +8,15 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-  
-.separator {
-width: 30%;
+.title {
+margin-top: 100px;
+margin-bottom: 10px;
 }
-
-    .title {
-    margin-top: 100px;
-    margin-bottom: 10px;
-
 
 hr {
     width: 90%;
 }
-}
+
 
 .page_content {
   padding: 20px;
@@ -32,21 +27,3 @@ hr {
   }
 }
   
-  
-  .work-experience {
-    padding: 20px;
-    
-    .experience-title {
-      margin-top: 50px;
-    }
-    
-    .experience-summary {
-      margin-top: 30px;
-      margin-bottom: 50px;
-    }
-    
-    p {
-      font-size: 1.6rem;
-      letter-spacing: .2rem;
-    }
-  }

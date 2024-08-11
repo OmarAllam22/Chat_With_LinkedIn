@@ -13,7 +13,7 @@ class LinkedInChat:
         self.config_num = str(random.randint(0,1000))
 
         os.environ["GOOGLE_API_KEY"] = 'AIzaSyDzyMWZB82YyWKzf21k6qdiAn4JG6DXL-Q'
-        self.chat = ChatGoogleGenerativeAI(model="gemini-1.5-pro")
+        self.chat = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
         self.linkedin_content = str(linkedin_dict)  
 
 
@@ -59,7 +59,8 @@ class LinkedInChat:
                     """
                     Distill the above chat messages into a single summary message. 
                     Include as many specific details as you can.
-                    Don't forget each time to keep information in your summary about the linkedIn profile content and the person background.  
+                    Don't forget each time to keep information in your summary about the linkedIn profile content and the person's background and try to make the summary be coincise and long as information needs not repetitive.
+                    Don't be distracted with irrelevant content.  
                     """,
                 ),
             ]
@@ -83,3 +84,26 @@ class LinkedInChat:
         self.output = self.chain_with_summarization.stream(self.chain_input,
                                              {"configurable": {"session_id": self.config_num}})
         return self.output 
+    
+    def update_linkedin_dict(self, old_linkedin_dict):
+        self.update_linkedin_prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system",
+                    """
+                    You have solid grammer and formal writing skills and always think from recruiter's point of view.
+                    Your task is to:
+                    - take both (the message history) and (a dictionary of linkedIn profile with keys and values).
+                    - return a dictionary with the same keys but the values are changed or not according to what in the message history. (ex: analyzing the messages history may give intuition to change some values of the dictionary and may not).
+                    Note (the person name key isn't changed anymore).
+                    return your answer as json dictionary.
+                    This is the messages history: {chat_history}.
+                    """ 
+                ),("human","{linkedIn_profile}")
+            ]
+        )
+
+        self.updating_chain = self.update_linkedin_prompt | self.chat
+        
+        self.updated_linkedin_dictionary = self.updating_chain.invoke({"chat_history":self.stored_messages,
+                                                           "linkedIn_profile":old_linkedin_dict}).content
+        return self.updated_linkedin_dictionary

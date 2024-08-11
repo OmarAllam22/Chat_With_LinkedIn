@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Resume(By_OmarAllam)</title>
     <link rel="stylesheet" type="text/css" href="template.css" />
-</head>
+    <script src= "https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="script.js"></script>
+  </head>
 <body>
     
-<div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="title text-center">
-          <span class="personal_info" id="name">{name}</span>
-          <span class="personal_info" id="headline">{headline}</span>
-          <span class="personal_info" href="{profile_link}">{profile_link}</span>
-          <hr />
-        </div>
+      <div class="page_content">
         
-        <!-- summary section -->
-      <div class="page_content">   
+        <!-- personal_info section --> 
+        <div class="personal_info">
+          <span id="name">{name}</span>
+          <span id="headline">{headline}</span>
+          <a id = "linkedin" href="{profile_link}">{profile_link}</a>
+        </div>
+        <hr />
+        
+        <!-- summary section -->   
         <div class="summary">
-          <h2 class="text-center">Summary</h2>
           {summary}
         </div>
         <hr />
@@ -49,10 +49,13 @@
           {skills}
         </div>
         <hr />
-      </div>
-      </div>
-    </div>
-  </div>
 
+        <!-- courses section -->
+        <div class="courses">
+          {courses}
+        </div>
+        <hr />
+      </div>
+      <button onclick="generatePDF()">Download Resume</button>
 </body>
 </html>

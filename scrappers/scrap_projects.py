@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import time
 
 class ScrapProjects:
     def __init__(self, driver, profile_link, section_soup):
@@ -36,6 +37,7 @@ class ScrapProjects:
             self.driver.get(show_more_link)
             temp_section_src = self.driver.page_source
             temp_section_soup = BeautifulSoup(temp_section_src, "lxml")
+            time.sleep(3)
             self.driver.get(self.profile_link+"#arrow-left-medium") # to return to the main page after entering the show-more-projects arrow.
             return self._extract(temp_section_soup, is_more=True)
         else:

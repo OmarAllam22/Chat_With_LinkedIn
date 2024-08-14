@@ -1,25 +1,30 @@
 body {
     background: #fff;
     color: #1B1B25;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 .personal_info{
   text-align: center;  
   font-family: 'Josefin Sans', sans-serif;
 }
-
+/*
 .title {
 margin-top: 100px;
 margin-bottom: 10px;
 }
-
+*/
 hr {
-    width: 90%;
+    
+    height: 2px;
 }
 
 
 .page_content {
-  padding: 20px;
+  padding: 10px;
   
   p {
     font-size: 1.6rem;

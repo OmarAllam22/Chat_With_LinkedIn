@@ -3,99 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Resume(By_OmarAllam)</title>
     <link rel="stylesheet" type="text/css" href="template.css" />
-</head>
+    <script src= "https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="function.js"></script>
+  </head>
 <body>
-    
-<div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="title text-center">
-          <span class="personal_info" id="name"><h1>Mostafa Edrees</h1></span>
-          <span class="personal_info" id="headline"><h2>Embedded Systems Enthusiastic | Undergraduate Electronics and Communication Engineer</h2></span>
-          <span class="personal_info" href="https://www.linkedin.com/in/mostafa-edrees11/">https://www.linkedin.com/in/mostafa-edrees11/</span>
-          <hr />
-        </div>
+      <button onclick="generatePDF()">Download Resume</button>
+      
+      <div id="page_content">
         
-        <!-- summary section -->
-      <div class="page_content">   
+        <!-- personal_info section --> 
+        <div class="personal_info">
+          <h1 id="name">Omar Allam</h1>
+          <h4 id="headline">Machine Learning Enthusiast | Data Science Intern | Electronics & Communications Engineering Student</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+          </svg>
+          <a id = "linkedin" style="vertical-align: top;" href="https://www.linkedin.com/in/omarallam22/"> LinkedIn Profile</a>
+        </div>
+        <hr />
+        
+        <!-- summary section -->   
         <div class="summary">
-          <h2 class="text-center">Summary</h2>
-          <p>Highly motivated Electronics & Communication Engineering student seeking opportunities to enhance embedded software engineering skills and knowledge. </p>
+          <h2>Summary</h2><p>I'm a driven Electronics and Communications Engineering student at Mansoura University with a passion for Machine Learning and Data Science. I'm eager to apply my technical skills in real-world projects, and I'm actively developing my abilities through internships and projects. Beyond technology, I enjoy graphic design and athletics, which have instilled in me a strong work ethic and collaborative spirit.</p>
         </div>
         <hr />
         
         <!-- education section -->
         <div class="education">
-          <h3>Education</h3><ul><li><h4>Mansoura University</h4><p>Oct 2020 - 2025</p><p>Student</p></li></ul>
+          <h2>Education</h2><ul><li><h4>Mansoura University</h4><p>2020 - 2025</p><p>Pursuing a Bachelor of Science in Electronics and Communications Engineering.  Active member of IEEE ManCSC, CAT Reloaded, UCCD, GDSC Mansoura, and the Athletics Club.</p></li><li><h4>Gharbia STEM School</h4><p>Sep 2017 - Jul 2020</p><p>Graduated with honors.  Specialized in STEM subjects and participated in research projects and advanced academic learning.  Developed strong problem-solving and critical thinking skills through semester-based projects.</p></li></ul>
         </div>
         <hr />
 
         <!-- experience section -->
         <div class="experience">
-          <h3>Experience</h3><ul>
-            <li>
-                <h4 style="display:inline">Embedded Systems Supervisor</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;">Jan 2024 - Present</span>
-                <h5>CAT Reloaded</h5>
-                <p> </p>
-            </li>  
-            <li>
-                <h4 style="display:inline">Embedded Systems Member</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;">Nov 2022 - Jul 2024</span>
-                <h5>CAT Reloaded</h5>
-                <p>Developed practical embedded systems skills, including proficiency in C programming and data structures. Contributed to team projects, applying knowledge to real-world embedded systems challenges</p>
-            </li>  
-            <li>
-                <h4 style="display:inline">Embedded Systems Supervisor</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;"></span>
-                <h5>STARKS MU</h5>
-                <p> </p>
-            </li>  
-            <li>
-                <h4 style="display:inline">Embedded systems trainee</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;"></span>
-                <h5>STARKS MU</h5>
-                <p>Gained hands-on experience in embedded systems development, focusing on C programming for resource-constrained environments. Participated in team projects, learning practical skills in embedded software design and implementation.</p>
-            </li>  
-            <li>
-                <h4 style="display:inline">Embedded Software Engineer, 2nd Star ⭐⭐</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;">Feb 2023 - Aug 2023</span>
-                <h5>Learn In Depth</h5>
-                <p>Successfully completed the second stage of the "Mastering Embedded Systems" online diploma program, achieving a strong score of 79/90 in the First Term Exams. Demonstrated proficiency in advanced embedded C, data structures, and system architecture through two challenging projects. Expanded knowledge in embedded systems development, solidifying skills in C programming and system-level design.</p>
-            </li>  
-            <li>
-                <h4 style="display:inline">Embedded Software Engineer, 1st Star ⭐</h4>
-                <table>
-                <span style = "margin-right:30px; float:right;">Nov 2022 - Feb 2023</span>
-                <h5>Learn In Depth</h5>
-                <p>Successfully completed the first stage of the "Mastering Embedded Systems" online diploma program, achieving a perfect score on the midterm exam. Gained foundational knowledge in embedded systems concepts, C programming fundamentals (including basics, conditions, loops, arrays, strings, and functions), and version control using Git. Established a strong base for further learning in embedded systems development, demonstrating quick grasp of core concepts and tools.</p>
-            </li>  
-            </ul>
+          <h2>Experience</h2><ul><li><h4 style="display:inline">Big Data Trainee</h4><span style = "margin-right:30px; float:right;">July 2023 - August 2023</span><h5>Samsung Innovation Campus</h5><p>Gained hands-on experience in Big Data technologies, contributing to projects that involved data analysis, processing, and visualization. Developed skills in [mention specific tools/technologies used].</p></li><li><h4 style="display:inline">Data Science Supervisor</h4><span style = "margin-right:30px; float:right;">January 2023 - Present</span><h5>CAT Reloaded</h5><p>Led a team of data science trainees, providing guidance and mentorship on data analysis techniques, algorithms, and project implementation. Successfully mentored team members, resulting in [quantifiable achievement related to team performance].</p></li><li><h4 style="display:inline">Graphic Design Member</h4><span style = "margin-right:30px; float:right;">January 2023 - Present</span><h5>CAT Reloaded</h5><p>Contributed to the team's marketing efforts by designing graphics for social media campaigns and events. Developed creative designs that [mention specific impact, e.g., increased engagement on social media].</p></li><li><h4 style="display:inline">Data Science & Machine Learning Trainee</h4><span style = "margin-right:30px; float:right;">January 2023 - Present</span><h5>CAT Reloaded</h5><p>Enhanced my data science and machine learning skills through rigorous training and practical projects. Successfully completed [mention specific projects or tasks] and gained expertise in [mention specific areas of expertise].</p></li><li><h4 style="display:inline">Data Science Assistant</h4><span style = "margin-right:30px; float:right;">January 2023 - Present</span><h5>IEEE Mansoura Computer Society Chapter</h5><p>Supported the chapter's data science initiatives by providing guidance and assistance to members. Helped [mention specific achievements, e.g., organize workshops, mentor students, develop data analysis projects].</p></li><li><h4 style="display:inline">Data Science & Business Analytics Intern</h4><span style = "margin-right:30px; float:right;">August 2022 - September 2022</span><h5>The Sparks Foundation</h5><p>Refreshed and enhanced my analytical skills through a one-month remote internship. Successfully completed a project that involved [mention project details] and demonstrated proficiency in [mention specific skills used].</p></li></ul>
         </div>
         <hr />
 
         <!-- projects section -->
         <div class="projects">
-          <h3>Projects</h3><ul><li><h4>Traffic Light Control System</h4><p>Designed a Traffic Light Control System with dual modes (Normal and Pedestrian) for efficient traffic management and pedestrian safety. Incorporated sequential LED transitions and pedestrian activation through an external button press for enhanced usability. Streamlined car traffic flow while prioritizing pedestrian crossings, improving overall road safety.</p></li><li><h4>PING PONG GAME</h4><p>A ping pong game using EXTI & LCD Drivers in Atmega32.</p></li><li><h4>AVR Calculator</h4><p>This AVR calculator project, designed for AVR microcontrollers, includes basic arithmetic operations (+, -, *, /), handling multi-digit operands, support for negative numbers, memory for the last value used, and special handling for division, including integer and fractional parts display and division by zero error detection.</p></li><li><h4>Fire Control & Smart IOT system</h4><p>A real-time fire alarm detection system connected with a user-friendly app customized for customers. This project addresses the devastating impact of fires on wildlife, highlighting the loss of a billion animals in Egypt and California due to fires. It emphasizes the importance of fire prevention for sustainable development, as fires destroy the environment, economy, and human lives.</p></li><li><h4>Student Management System</h4><p>This project is a C-based student information management system. It features functions for adding, finding, deleting, updating, and printing student records. It also includes data validation and file storage capabilities. The system is designed to be user-friendly and efficient for managing student data.</p></li><li><h4>Pressure Control System</h4><p>This project involved designing a pressure control system from scratch using a state machine approach. It includes a detailed report, UML diagrams, and custom-written code for linker scripts, Makefiles, and startup routines. The project demonstrates a comprehensive understanding of embedded systems development.</p></li><li><h4>Student Record System</h4><p>This C-based Student Record System manages student records with features like adding, removing, editing, and viewing records. It incorporates user authentication with admin and user modes, providing different access levels for security. The project showcases skills in software design and C programming.</p></li><li><h4>Library Management System</h4><p>This collaborative project involved building a Library Management System in C. It focuses on managing user accounts for both admins and library members, enabling efficient book tracking, borrowing, and returning processes.</p></li><li><h4>Multiple-Disease-Prediction-System-using-Machine-Learning</h4><p>This project involves developing a web application using Python and Machine Learning to predict diseases like diabetes, heart disease, hypertension, and Parkinson's. It utilizes algorithms like SVM and Logistic Regression and is deployed using Streamlit. The project showcases skills in data analysis, machine learning, and web development.</p></li></ul>
+          <h2>Projects</h2><ul><li><h4>Machine Learning Model for [Project Purpose]</h4><p>Developed a machine learning model using [mention specific technologies] to [describe the project's objective]. The model achieved [quantifiable results] and demonstrated [mention key takeaways or insights].</p></li><li><h4>Data Analysis Project for [Project Purpose]</h4><p>Conducted a data analysis project using [mention specific tools] to [describe the project's objective]. The analysis revealed [mention key findings] and provided insights into [mention areas of impact].</p></li></ul>
         </div>
         <hr />
 
         <!-- skills section -->
         <div class="skills">
-          <h3>Skills</h3><ul><li>ARM</li><li>AVR</li><li>Embedded Systems</li><li>Algorithm</li><li>Embedded C</li><li>Data structure</li><li>Git</li><li>C (Programming Language)</li><li>Problem Solving</li><li>Linux</li><li>Microsoft Word</li><li>Teamwork</li><li>Microsoft Excel</li></ul>
+          <h2>Skills</h2><ul><li>ARM</li><li>Natural Language Processing (NLP)</li><li>Computer Vision</li><li>Linux</li><li>Machine Learning</li><li>SQL</li><li>Python (Programming Language)</li><li>Microsoft Excel</li><li>C (Programming Language)</li><li>Microsoft Office</li><li>Presentation Skills</li><li>Teamwork</li><li>Volunteering</li><li>Athletics</li><li>Football</li><li>Data Analysis</li><li>Data Visualization</li><li>Scikit-learn</li><li>TensorFlow</li><li>PyTorch</li><li>Pandas</li><li>NumPy</li></ul>
+        </div>
+        <hr />
+
+        <!-- courses section -->
+        <div class="courses">
+          <h2>Certifications</h2><ul><li> <h4>Machine Learning Certification</h4><p>Coursera</p></li><li> <h4>Data Science Certification</h4><p>Udacity</p></li></ul>
         </div>
         <hr />
       </div>
-      </div>
-    </div>
-  </div>
-
 </body>
 </html>

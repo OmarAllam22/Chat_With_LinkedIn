@@ -27,14 +27,6 @@ class ScrapVolunteering:
         """
         output here is list containing all the skills.
         """
-        if self.footer != None:
-            show_more_link = self.footer.find("a").get('href')
-            self.driver.get(show_more_link)
-            temp_full_page_src = self.driver.page_source
-            temp_full_page_soup = BeautifulSoup(temp_full_page_src, "lxml")
-            time.sleep(3)
-            self.driver.get(self.profile_link+"#arrow-left-medium") # to return to the main page after entering the show-more-projects arrow.
-            return self._extract(temp_full_page_soup, is_more=True)
-        else:
-            return self._extract(self.soup, is_more=False)
+        #scrap what you see at first
+        return self._extract(self.soup, is_more=False)
         

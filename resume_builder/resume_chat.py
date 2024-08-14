@@ -11,7 +11,10 @@ class ResumeChat:
     def __init__(self, linkedin_chat_object, start_from='chat'):
         
         self.config_num = str(random.randint(0,1000))
-        self.stored_messages = ChatMessageHistory()
+
+        self.messages_history = ChatMessageHistory()
+        self.stored_messages = []
+        
         self.linkedin_content = linkedin_chat_object.linkedin_content 
 
         if start_from == "chat":
@@ -30,16 +33,16 @@ class ResumeChat:
         self.prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", """
-                You have solid grammer and formal writing skills and always think from recruiter's point of view.
-                Your task is to help a person building his/her resume via conversation and remember each time to tailor the resume content to the specific job description given to you.
-                You have access to chat history and a LinkedIn profile section's content.
-
-                Your task is to update this linkedIn profile sections if necessary to output a json with the same keys given to you.
+                Act as a seasoned recruiter crafting a standout resume. 
+                Utilize the provided LinkedIn profile, chat history, and job description to create or enhance resume sections.
+                If LinkedIn data is missing, generate compelling content aligned with the job description. 
+                Prioritize clear, concise, and impactful language. 
+                Focus on information relevant to the target job.
+                Here is the LinkedIn profile content {linkedIn_profile}
                 
-                Note: If user asked a general question, answer it from your knowledge but tell him to return to the main point of building the resume tailored to the given job descriptoin.
-                Always remember, you think as recruiter who filter applicants based on goodness of their resume.                
-                Remeber to be coincise in your response.
-                Here is the LinkedIn profile content {linkedIn_profile} 
+                Your task is to help the person tailor his/her resume to his specified job description.
+                
+                Note: Be coincise and avoid lengthy messages with less information and always be specific to the person. 
                 """),
                 ("placeholder", "{chat_history}"),
                 ("user", "{input}"),
@@ -66,10 +69,8 @@ class ResumeChat:
                 (
                     "user",
                     """
-                    Distill the above chat messages into a single summary message. 
-                    Include as many specific details as you can.
-                    Don't forget each time to keep information in your summary about the linkedIn profile content and the person's background and try to make the summary be coincise and long as information needs not repetitive.
-                    Don't be distracted with irrelevant content.  
+                    Concisely summarize the conversation, focusing on key details related to LinkedIn profile analysis, job description integration, and resume content generation.
+                    Highlight specific recommendations, challenges, or potential solutions discussed.  
                     """,
                 ),
             ]
@@ -92,6 +93,7 @@ class ResumeChat:
         self.chain_input = {"input": user_input, "linkedIn_profile": self.linkedin_content}
         self.output = self.chain_with_summarization.stream(self.chain_input,
                                              {"configurable": {"session_id": self.config_num}})
+    
         return self.output 
     
 
@@ -100,12 +102,12 @@ class ResumeChat:
             [
                 ("system",
                     """
-                    You have solid grammer and formal writing skills and always think from recruiter's point of view.
-                    Your task is to:
-                    - take a json contains linkedIn profile content for a given person.
-                    - return a json with the same keys but the values enhanced and improved from the chat and conversation history. (ex: analyzing the messages history may give intuition to change some values of the dictionary and may not).
-                    Note (the person name key isn't changed anymore).
-                    return your answer as json dictionary.
+                    Act as a seasoned recruiter enhancing LinkedIn profile content. Given a profile as a JSON object and a chat history, 
+                    refine existing profile sections based on recruiter best practices and conversation context. Prioritize clarity, conciseness, and impact, aligning content with the target job.
+
+                    If a section's content is missing or marked as "`section_name_placeholder` wasn't found," generate appropriate content based on available information. 
+                    Return the enhanced profile as a JSON dictionary the same keys given as input.
+
                     This is the messages history: {chat_history}.
                     """ 
                 ),("human","{linkedIn_profile}")
@@ -117,3 +119,57 @@ class ResumeChat:
         self.updated_linkedin_dictionary = self.updating_chain.invoke({"chat_history":self.stored_messages,
                                                            "linkedIn_profile":old_linkedin_dict}).content
         return self.updated_linkedin_dictionary
+    
+
+    def get_sections_as_html(self, updated_linkedin_dict):
+        self.get_resume_as_html = ChatPromptTemplate.from_messages(
+            [
+                ("system",
+                    """
+                    You have solid grammer and formal writing skills and always think from recruiter's point of view.
+                    Your task is to:
+                    - take a json contains linkedIn profile content for a given person.
+                    - return a json with the same keys but the values for each key (in ['about', 'experience', 'education', 'licenses_and_certifications','projects','skills']) is wrapped in html code according to the following:
+                    * if the key was "about", its value is:
+                    ```
+                    <h2>Summary</h2><p>here is the about content</p>
+                    ```
+                    * if key was "experience", its value is:
+                    ```
+                    <h2>Experience</h2><ul><li><h4 style="display:inline">first position</h4><span style = "margin-right:30px; float:right;">duration from - to</span><h5>company of first position</h5><p>description about this position responsibilities (if not provided, generate summarized one)</p></li>"the other experience sections are put between <li></li> with the same format""No emojies are allowed"</ul> 
+                    ```
+                    * if key was "education", its value is:
+                    ```
+                    <h2>Education</h2><ul><li><h4>school name</h4><p>duration from - to</p><p> description if exist (may be the GPA or Grade. if not provided, leave it without any text)</p></li>"the other education sections are put between <li></li> with the same format"</ul>
+                    ```
+                    * if key was "licenses_and_certifications":
+                    ```
+                    <h2>Certifications</h2><ul><li> <h4>first certificate name</h4><p>certificate's organization</p></li>"the other certificates sections are put between <li></li> with the same format"</ul>
+                    ```
+                    * if key was "projects":
+                    ```
+                    <h2>Projects</h2><ul><li><h4>project name</h4><p>description of the project (if not provided, generate one with action verbs and good grammer that tailor the resume)</p></li>"the other projects are put here between <li></li> with the same format."</ul>
+
+                    ```
+                    if key was "skills":
+                    ```
+                    <h2>Skills</h2><ul><li>ARM</li>"the other skills sections are put between <li></li> with the same format"</ul>
+                    ```
+                    
+                    If a section's content is missing or marked as "`section_name_placeholder` wasn't found," generate appropriate content based on available information. 
+                    
+                    Remember don't include general words in your answer (ex: Don't include [start date] - [end date] ... fill them with specific time instead or even make up them.)
+
+                    Note: Return your answer as json dictionary with the keys ['person_name', 'person_headline', 'about', 'experience', 'education', 'licenses_and_certifications','projects','skills' ].
+
+                    This is the messages history: {chat_history}.
+                    """ 
+                ),("human","{linkedIn_profile}")
+            ]
+        )
+
+        self.html_chain = self.get_resume_as_html | self.chat
+        
+        self.output_html = self.html_chain.invoke({"chat_history":self.stored_messages,
+                                                           "linkedIn_profile":updated_linkedin_dict}).content
+        return self.output_html

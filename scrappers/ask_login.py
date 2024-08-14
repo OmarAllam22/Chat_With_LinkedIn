@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
+import time
 
 class AskLogIn:
     def __init__(self, chrome_driver_path, profile_link=None):
@@ -17,7 +18,7 @@ class AskLogIn:
         while(True):
             if (self.driver.current_url == "https://www.linkedin.com/feed/"):
                 break
-        print("LogIn Succeeded✔")
+        print("✔LogIn Succeeded✔")
         
 
         if self.profile_link:

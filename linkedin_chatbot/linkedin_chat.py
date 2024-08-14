@@ -18,19 +18,24 @@ class LinkedInChat:
 
 
         self.messages_history = ChatMessageHistory()
+        self.stored_messages = []
         self.prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", """
                 You have solid grammer and formal writing skills and always think from recruiter's point of view.
                 You have access to chat history and a LinkedIn profile section's content dictionary with keys as 
                 section name and values as content written in this section. (Note: Featured section content is a summary of the content not the actual content written on linkedIn).
-                Your task is to answer the user queries to enhance the linkedIn profile sections content given to you, for example you may:
-                - recommend adding missing sections.
-                - correct the given sections if they are written grammatically wrong or formally wrong.
-                - strenthen the given content to be outstanding from a recruiter point of view.
+                
+                Act as a recruiter providing expert LinkedIn profile feedback. 
+                Analyze the given profile content, identify strengths, weaknesses, and suggestions tailored to the given profile. 
+                Offer concise, actionable advice to enhance the profile's impact. 
+                Provide general career advice as needed.
+                
                 Note: If user asked a general question, answer it from your knowledge. Always remember, you think as recruiter.                
-                Remeber to be coincise in your response.
-                Here is the LinkedIn profile content {linkedIn_profile} 
+                Here is the LinkedIn profile content: {linkedIn_profile} 
+                 
+                Note: Be coincise and avoid lengthy messages with less information and always be specific to the person.
+                 
                 """),
                 ("placeholder", "{chat_history}"),
                 ("user", "{input}"),
@@ -58,8 +63,8 @@ class LinkedInChat:
                     "user",
                     """
                     Distill the above chat messages into a single summary message. 
-                    Include as many specific details as you can.
-                    Don't forget each time to keep information in your summary about the linkedIn profile content and the person's background and try to make the summary be coincise and long as information needs not repetitive.
+                    Include as many specific details as you can related to linkedIn profile content, your revised feedback and person's background.
+                    Try to be coincise and avoid redundancy.
                     Don't be distracted with irrelevant content.  
                     """,
                 ),
@@ -83,20 +88,19 @@ class LinkedInChat:
         self.chain_input = {"input": user_input, "linkedIn_profile": self.linkedin_content}
         self.output = self.chain_with_summarization.stream(self.chain_input,
                                              {"configurable": {"session_id": self.config_num}})
-        return self.output 
+        return self.output
     
     def update_linkedin_dict(self, old_linkedin_dict):
         self.update_linkedin_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system",
                     """
-                    You have solid grammer and formal writing skills and always think from recruiter's point of view.
-                    Your task is to:
-                    - take both (the message history) and (a dictionary of linkedIn profile with keys and values).
-                    - return a dictionary with the same keys but the values are changed or not according to what in the message history. (ex: analyzing the messages history may give intuition to change some values of the dictionary and may not).
-                    Note (the person name key isn't changed anymore).
-                    return your answer as json dictionary.
-                    This is the messages history: {chat_history}.
+                    Assume the role of a seasoned recruiter with expert writing and grammar skills. 
+                    Analyze the provided LinkedIn profile and chat history to optimize the profile's content. 
+                    Return a modified LinkedIn profile dictionary, incorporating insights from the chat history while preserving the "person_name" key's value as it is and rewrite the other values if that is effecient.
+                    reserve the keys of your returned json and the same input keys to you.
+                    
+                    Chat history: {chat_history}.
                     """ 
                 ),("human","{linkedIn_profile}")
             ]

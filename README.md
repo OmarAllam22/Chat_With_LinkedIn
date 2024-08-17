@@ -26,7 +26,7 @@ ________________
     - The final application was containerized by building a **linux-based docker-image** [here 🐋](https://hub.docker.com/u/omarallam22).
 ________________
 ## 📕 How to use (You have 2 choices):
--------------
+
 ### First, cloning the repository:
    * 1️⃣ run `git clone https://github.com/OmarAllam22/Chat_With_LinkedIn.git`.
    * 2️⃣ open the Chat_With_LinkedIn directory.
@@ -40,4 +40,13 @@ ________________
       - This `-v /tmp/.X11-unix:/tmp/.X11-unix:ro` This mounts the local **/tmp/.X11-unix** directory to the container's **/tmp/.X11-unix** directory in **read-only** mode. This is typically used for running graphical applications within the container (GoogleChrome in our case).
       - This `-p 80:8501` maps port 8501 inside the container (default port for streamlit) to port 80 on the local host machine (default port for localhost).
    * 3️⃣ From your local machine, open a any web browser tab and **search for `http://localhost`**.
+________________
+## 📕 Resources:
 
+* Hands on LangChain tutorials. [Here](https://python.langchain.com/v0.2/docs/tutorials/)
+* Docker By Ahmed Sami. [Here](https://www.youtube.com/watch?v=PrusdhS2lmo&t=4310s)
+* Building GUI application with docker introducing `X-server` concept. [Here](https://www.youtube.com/watch?v=cMsIT2otEjA&t=368s)
+* Guide to building streamlit chatbot. [Here](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)
+* About `streamlit.session_state` concept. [Here](https://docs.streamlit.io/get-started/fundamentals/advanced-concepts) 
+* Using chromedriver and selenium on linux. [Here](https://www.youtube.com/watch?v=67h3IT2lm40)
+________________

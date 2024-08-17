@@ -33,8 +33,8 @@ ________________
 ## 📕 How to use (You have 2 choices):
 
 ### First, cloning the repository:
-   * 1️⃣ run `git clone https://github.com/OmarAllam22/Chat_With_LinkedIn.git`.
-   * 2️⃣ open the Chat_With_LinkedIn directory.
+   * 1️⃣ run `git clone https://github.com/OmarAllam22/Chat_With_LinkedIn.git`
+   * 2️⃣ open the Chat_With_LinkedIn directory & run `pip install requirements.txt`
    * 3️⃣ run `streamlit run app.py`
 -------------
 ### Second, using the docker image (currently for linux-based os):

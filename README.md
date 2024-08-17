@@ -1,5 +1,5 @@
 # Chat_With_LinkedIn
-## 📕 Overview:
+## 📘 Overview:
 This project aims to improve people's LinkedIn profiles and resumes using artificial intelligence. It will:
 - 1️⃣ offer suggestions on how to strengthen your LinkedIn profile.
 - 2️⃣ Help you create a professional resume tailored to your given job description.
@@ -8,11 +8,11 @@ This project aims to improve people's LinkedIn profiles and resumes using artifi
  </p>
  
 _______________________________
-## 📕 Project Goal:
+## 📘 Project Goal:
 
 To create an AI-powered tool that enhances LinkedIn profiles and generates tailored resumes based on user input and LinkedIn data.
 ________________
-## 📕 Technical Implementation:
+## 📘 Technical Implementation:
 
 * ### Foundation Model:
   The project was built on top of the `Gemini-1.5-flash` model API.
@@ -29,7 +29,7 @@ ________________
     - The GUI was designed using `streamlit` 
     - The final application was containerized by building a **linux-based docker-image** [here 🐋](https://hub.docker.com/u/omarallam22).
 ________________
-## 📕 How to use (You have 2 choices):
+## 📘 How to use (You have 2 choices):
 
 ### First, For *Windows users*:
    * 1️⃣ run `git clone https://github.com/OmarAllam22/Chat_With_LinkedIn.git`
@@ -46,7 +46,7 @@ ________________
       - This `-p 80:8501` maps port 8501 inside the container (default port for streamlit) to port 80 on the local host machine (default port for localhost).
    * 4️⃣ From your local machine, open a any web browser tab and **search for `http://localhost`**.
 ________________
-## 📕 Resources:
+## 📘 Resources:
 
 * Hands on LangChain tutorials. [Here](https://python.langchain.com/v0.2/docs/tutorials/)
 * Docker By Ahmed Sami. [Here](https://www.youtube.com/watch?v=PrusdhS2lmo&t=4310s)

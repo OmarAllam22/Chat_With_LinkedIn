@@ -3,6 +3,11 @@
 This project aims to improve people's LinkedIn profiles and resumes using artificial intelligence. It will:
 - 1️⃣ offer suggestions on how to strengthen your LinkedIn profile.
 - 2️⃣ Help you create a professional resume tailored to your given job description.
+
+<p align="center">
+ <img width="700" src="https://github.com/user-attachments/assets/ee027085-cae4-42b2-852a-6d3e6d2affdb" alt="App">
+ </p>
+ 
 _______________________________
 ## 📕 Project Goal:
 

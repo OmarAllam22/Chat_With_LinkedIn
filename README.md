@@ -1,5 +1,7 @@
 # Chat_With_LinkedIn
 ## 📘 Overview:
+For the project demo, visit this [LinkedIn post](https://www.linkedin.com/posts/omarallam22_chatabrwithabryourabrlinkedin-linkedinprofile-activity-7230671805382823936-c2hM?utm_source=share&utm_medium=member_desktop).
+
 This project aims to improve people's LinkedIn profiles and resumes using artificial intelligence. It will:
 - 1️⃣ offer suggestions on how to strengthen your LinkedIn profile.
 - 2️⃣ Help you create a professional resume tailored to your given job description.

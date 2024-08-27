@@ -1,7 +1,7 @@
 langchain
 langchain_community
 langchain_google_genai
-selenium==4.9.1
+selenium=4.9.1
 streamlit
 bs4
 termcolor

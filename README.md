@@ -28,8 +28,8 @@ ________________
     - The JSON data is used to prompt engineer the `gemini-1.5-flash` model for specific tasks used in the three directories (`scrappers`, `linkedin_chatbot` and `resume_builder`).
     - Langchain is employed to create LLM chains for conversation flow and resume generation.
 * ### Deployment:
-    - The GUI was designed using `streamlit` 
-    - The final application was containerized by building a **linux-based docker-image** [here 🐋](https://hub.docker.com/u/omarallam22).
+    - The prject is mainly run in GUI-mode (was designed using `streamlit`) on windows.  
+    - The final application was containerized by building a **linux-based docker-image** from DockerFile.
 ________________
 ## 📘 How to use (You have 2 choices):
 
